@@ -19,6 +19,7 @@ audio3.preload = 'auto';
 audio4.preload = 'auto';
 
 btn1.addEventListener('click', function() {
+    audio1.load();
     audio1.play();
 });
 btn2.addEventListener('click', function() {
