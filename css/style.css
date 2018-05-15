@@ -122,4 +122,12 @@ address, address a {
 a {
     color: orangered;
 }
+.additionalBtns {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 10vw;
+    width: 20vw;
+    font-size: 4vh;   
+}
 

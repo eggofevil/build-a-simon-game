@@ -9,6 +9,11 @@ var startBtn = document.getElementById('startBtn');
 var resetBtn = document.getElementById('resetBtn');
 var strictBtn = document.getElementById('strictBtn');
 
+var recBtn = document.getElementById('rec');
+var playBtn = document.getElementById('play');
+var recIndication = document.getElementById('recIndication');
+var rec = false;
+
 var audio1 = new Audio('sound/simonSound1.mp3');
 var audio2 = new Audio('sound/simonSound2.mp3');
 var audio3 = new Audio('sound/simonSound3.mp3');
@@ -41,7 +46,7 @@ btns.forEach(function(btn) {
 
 function btnFunc(btn) {
     btn.audio.play();
-    buildUserMelody(btn);
+    if (rec) buildUserMelody(btn);
 }
 /*
 function btnFunc(btn) {
@@ -75,6 +80,7 @@ function buildUserMelody(btn) {
 
 
 function playMelody() {
+    
     if(counter < 19) {
         melody[counter].click();
         melody[counter].setAttribute('active', 'true');
@@ -85,6 +91,8 @@ function playMelody() {
     }
 }
 function playUserMelody() {
+    rec = false;
+    recIndication.style.color = '';
     if(counter < userMelody.length) {
         userMelody[counter].click();
         userMelody[counter].setAttribute('active', 'true');
@@ -94,3 +102,15 @@ function playUserMelody() {
         counter = 0;
     }
 }
+
+recBtn.addEventListener('click', function () {
+    if (!rec) userMelody = [];
+    if (rec) {
+        rec = false;
+        recIndication.style.color = '';
+    } else {
+        rec = true;
+        recIndication.style.color = 'red';
+    }
+});
+playBtn.addEventListener('click', playUserMelody);

@@ -120,4 +120,18 @@ address, address a {
 a {
     color: orangered;
 }
-
+#additionalBtnsDiv {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 5vw;
+    width: 20vw;
+}
+.additionalBtns {
+    width: 10vw;
+    height: 5vw;
+    font-size: 2vh;   
+}
+#recIndication {
+    font-size: 2vh;
+}
