@@ -1,3 +1,4 @@
+
 var btn1 = document.getElementById('btn1');
 var btn2 = document.getElementById('btn2');
 var btn3 = document.getElementById('btn3');
@@ -23,31 +24,39 @@ audio2.preload = 'auto';
 audio3.preload = 'auto';
 audio4.preload = 'auto';
 
-btn1.addEventListener('click', function() {
-    audio1.play().catch(function(){
-        audio1.src = 'sound/wav-sounds/simonSound1.wav';
-        audio1.play();
+btn1.audio = audio1;
+btn1.altSrc = 'sound/wav-sounds/simonSound1.wav';
+btn2.audio = audio2;
+btn2.altSrc = 'sound/wav-sounds/simonSound2.wav';
+btn3.audio = audio3;
+btn3.altSrc = 'sound/wav-sounds/simonSound3.wav';
+btn4.audio = audio4;
+btn4.altSrc = 'sound/wav-sounds/simonSound4.wav';
+
+btns.forEach(function(btn) {
+   btn.addEventListener('click', function() {
+       btnFunc(this);
+   });
+});
+
+function btnFunc(btn) {
+    btn.audio.play();
+    buildUserMelody(btn);
+}
+/*
+function btnFunc(btn) {
+    btn.classList.add('active');
+    btn.audio.play().then(function() {
+        btn.classList.remove('active');
+    }).catch(function(){
+        btn.audio.src = btn.altSrc;
+        btn.audio.play().then(function() {
+            btn.classList.remove('active');
+        });
     });
-    buildUserMelody(this);
-});
-btn2.addEventListener('click', function() {
-    audio2.play().catch(function(){
-        audio2.src = 'sound/wav-sounds/simonSound2.wav';
-        audio2.play();
-    }); 
-});
-btn3.addEventListener('click', function() {
-    audio3.play().catch(function(){
-        audio3.src = 'sound/wav-sounds/simonSound3.wav';
-        audio3.play();
-    }); 
-});
-btn4.addEventListener('click', function() {
-    audio4.play().catch(function(){
-        audio4.src = 'sound/wav-sounds/simonSound4.wav';
-        audio4.play();
-    }); 
-});
+    buildUserMelody(btn);
+}
+*/
 
 startBtn.addEventListener('click', initialize);
 
@@ -62,11 +71,25 @@ function buildUserMelody(btn) {
     userMelody.push(btn);
 }
 
+
+
+
 function playMelody() {
     if(counter < 19) {
         melody[counter].click();
+        melody[counter].setAttribute('active', 'true');
         counter++;
         setTimeout(playMelody, 500);
+    } else {
+        counter = 0;
+    }
+}
+function playUserMelody() {
+    if(counter < userMelody.length) {
+        userMelody[counter].click();
+        userMelody[counter].setAttribute('active', 'true');
+        counter++;
+        setTimeout(playUserMelody, 400);
     } else {
         counter = 0;
     }
